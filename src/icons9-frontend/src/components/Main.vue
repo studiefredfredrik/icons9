@@ -117,8 +117,10 @@ export default {
     margin: 20px;
   }
   .file-container{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
   }
   .list-item{
     margin: 10px;
