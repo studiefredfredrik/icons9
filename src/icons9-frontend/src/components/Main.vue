@@ -17,8 +17,8 @@
     </div>
     <input type="text" v-model="searchString" id="copy-box"/>
     <div class="footer">
-      <div class="footer-text"><a href="github.com/studiefredfredrik/icons9"><b>Icons9</b></a> - v0.2 - It works unless you're unlucky</div>
-      <div class="footer-text">Icons by <a href="www.fontawesome.com">FontAwesome</a> (free set)</div>
+      <div class="footer-text"><a href="http://github.com/studiefredfredrik/icons9"><b>Icons9</b></a> - v0.2 - It works unless you're unlucky</div>
+      <div class="footer-text">Icons by <a href="http://www.fontawesome.com">FontAwesome</a> (free set)</div>
     </div>
   </div>
 </template>
