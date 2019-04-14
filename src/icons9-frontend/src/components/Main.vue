@@ -99,6 +99,7 @@ export default {
     font-size: 12px;
   }
   .svg{
+    margin: auto;
     height: 30px;
     width: auto;
     color: black;
@@ -117,9 +118,15 @@ export default {
   .file-container{
     display: grid;
     grid-template-columns: auto auto auto auto;
+    justify-items: center;
+  }
+  .full-name{
+
   }
   .list-item{
-    margin: 10px;
+    width: 150px;
+    margin: 10px 1px;
+    justify-items: center;
   }
   #copy-box{
     height: 1px;
@@ -138,7 +145,7 @@ export default {
     color: #626262;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 750px) {
     .container{
       width: 100%;
       margin: auto;
@@ -146,6 +153,12 @@ export default {
     .file-container{
       display: grid;
       grid-template-columns: auto auto auto;
+    }
+  }
+  @media only screen and (min-width: 1930px) {
+    .file-container{
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto;
     }
   }
 </style>
