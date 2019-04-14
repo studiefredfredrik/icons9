@@ -124,7 +124,10 @@ export default {
   #copy-box{
     height: 1px;
     width: 1px;
-    visibility: hidden;
+    border: none;
+    outline: none;
+    color: #FFF;
+    background-color: #FFF;
   }
   textarea:focus, input:focus{
     outline: none;
