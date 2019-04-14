@@ -84,22 +84,20 @@ export default {
   .search-input::placeholder{
     color: #626262;
   }
-
   .options-container{
     align-self: flex-end;
   }
   .footer{
     position: relative;
     bottom: 20px;
-    margin-top: 10px
+    margin-top: 30px
   }
-  .footer-text-version{
+  .footer-text{
     text-align: center;
     font-style: italic;
     color: #626262;
     font-size: 12px;
   }
-
   .svg{
     height: 30px;
     width: auto;
@@ -110,7 +108,7 @@ export default {
     color:red;
   }
   .container{
-    width: 800px;
+    width: 80%;
     margin: auto;
   }
   .input{
@@ -119,8 +117,6 @@ export default {
   .file-container{
     display: grid;
     grid-template-columns: auto auto auto auto;
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
   }
   .list-item{
     margin: 10px;
@@ -136,5 +132,17 @@ export default {
   a{
     outline: none;
     text-decoration: none;
+    color: #626262;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .container{
+      width: 100%;
+      margin: auto;
+    }
+    .file-container{
+      display: grid;
+      grid-template-columns: auto auto auto;
+    }
   }
 </style>
