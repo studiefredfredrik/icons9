@@ -1,0 +1,13 @@
+version: "2"
+services:
+  musicman:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: always
+    volumes:
+      - /home/server/Music:/app/music
+      - ./config:/app/config
+      - ./content:/app/server/content
+    environment:
+      - DOCKER=1
