@@ -1,0 +1,5 @@
+.idea/
+node_modules/
+*.m3u
+server/content/**.json
+server/logs/**.txt
