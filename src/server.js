@@ -2,7 +2,7 @@ let glob = require('glob')
 let express = require('express');
 let app = express();
 let fs = require('fs')
-let port = 5050
+let port = 5000 || process.env.PORT
 
 svgToDataURL = svgStr => {
 	const encoded = encodeURIComponent(svgStr)

@@ -10,7 +10,7 @@
         <!--<div class="color-option"></div>-->
       <!--</div>-->
     <div v-if="icons && icons.length > 0" class="file-container">
-      <div v-for="(file, index) in icons" class="list-item">
+      <div v-for="(file, index) in icons" class="list-item" :key="index">
         <img class="svg" v-bind:src="file.path" v-bind:alt="file.path" @click="copyToClipboard(file)">
         <div class="full-name">{{file.fullName}}</div>
       </div>
