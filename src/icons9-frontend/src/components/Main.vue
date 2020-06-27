@@ -20,9 +20,9 @@
         <div class="full-name">{{file.fullName}}</div>
       </div>
     </div>
-    <div class="expand-all" @click="toggleLimit">
-      <span v-if="limit === 100">Show all icons</span>
-      <span v-if="limit !== 100">Limit to 100 icons</span>
+    <div class="expand-all" @click="toggleLimit" v-if="icons && icons.length >= 100">
+      <span v-if="limit === 100">Limited to 100, show everything?</span>
+      <span v-if="limit !== 100">Showing everything, limit to 100?</span>
     </div>
     <input type="text" v-model="searchString" id="copy-box"/>
     <div class="footer">
@@ -41,7 +41,7 @@ export default {
     return{
       allicons: null,
       searchString: '',
-      color: '#000000',
+      color: '#6F6F6F',
       colorDebounceHolder: null,
       iconset: 'mdi',
       limit: 100
@@ -156,11 +156,12 @@ export default {
   .expand-all{
     margin-top: 30px;
     margin-bottom: 20px;
+    margin-left: 20px;
     cursor: pointer;
-    font-size: 18px;
-    color: #626262;
-    text-decoration: underline;
-    text-align: center;
+    font-size: 16px;
+    color: #000000;
+    font-style: italic;
+    text-align: left;
   }
 
   .footer{
