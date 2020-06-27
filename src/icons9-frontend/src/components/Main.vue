@@ -16,7 +16,7 @@
     </div>
     <div v-if="icons && icons.length > 0" class="file-container">
       <div v-for="(file, index) in icons" class="list-item" :key="index">
-        <img class="svg" v-bind:src="getImagePath(file)" v-bind:alt="file.path" @click="copyToClipboard(file)" v-bind:download="file.path">
+        <img class="svg" v-bind:src="getImagePath(file)" v-bind:alt="file.path" @click="copyToClipboard(file)">
         <div class="full-name">{{file.fullName}}</div>
       </div>
     </div>
