@@ -7,7 +7,8 @@
       <label for="fas">fas</label>
     </div>
     <div class="toolbox-right">
-      <input type="color" class="colorpicker" :value="color" @change="updateColor" @input="updateColor"/>
+      <input type="color" class="colorpicker" :value="color" @change="updateColor" @input="updateColor"/><br>
+      <span class="color-text">{{color}}</span>
     </div>
     <div class="heading">Icons9</div>
 
@@ -84,7 +85,6 @@ export default {
       clearTimeout(this.colorDebounceHolder)
 
       this.colorDebounceHolder = setTimeout(() => {
-        console.log(e.target.value)
         this.color = e.target.value
       }, 100)
     },
@@ -112,6 +112,11 @@ export default {
     top: 0;
     right: 0;
     margin: 8px;
+
+    .color-text{
+      font-weight: bold;
+      font-size: 12px;
+    }
   }
   input[type=color]{
     width: 25px;
@@ -119,6 +124,8 @@ export default {
     border: none;
     border-radius: 25px;
     background: none;
+    float: right;
+    margin-bottom: 5px
   }
   input[type="color"]::-webkit-color-swatch-wrapper {
     padding: 0;
