@@ -1,35 +1,43 @@
 <template>
-  <div id="app" class="container">
-    <div class="toolbox-left">
-      <input type="radio" id="mdi" name="mdi" value="mdi" v-model="iconset" @change="getIcons">
-      <label for="mdi">mdi</label><br>
-      <input type="radio" id="fas" name="fas" value="fas" v-model="iconset" @change="getIcons">
-      <label for="fas">fas</label>
-    </div>
-    <div class="toolbox-right">
-      <input type="color" class="colorpicker" :value="color" @change="updateColor" @input="updateColor"/><br>
-      <span class="color-text">{{color}}</span>
-    </div>
-    <div class="heading">Icons9</div>
+  <div>
+    <div id="app" class="container">
+      <div class="toolbox-left">
+        <input type="radio" id="mdi" name="mdi" value="mdi" v-model="iconset" @change="getIcons">
+        <label for="mdi">mdi</label><br>
+        <input type="radio" id="fas" name="fas" value="fas" v-model="iconset" @change="getIcons">
+        <label for="fas">fas</label>
+      </div>
+      <div class="toolbox-right">
+        <input type="color" class="colorpicker" :value="color" @change="updateColor" @input="updateColor"/><br>
+        <span class="color-text">{{color}}</span>
+      </div>
+      <div class="heading">Icons9</div>
 
-    <div class="search-container">
-      <input class="search-input" type="text" v-model="searchString" placeholder="Search for an icon..."/>
-    </div>
-    <div v-if="icons && icons.length > 0" class="file-container">
-      <div v-for="(file, index) in icons" class="list-item" :key="index">
-        <img class="svg" v-bind:src="getImagePath(file)" v-bind:alt="file.path" @click="copyToClipboard(file)">
-        <div class="full-name">{{file.fullName}}</div>
+      <div class="search-container">
+        <input class="search-input" type="text" v-model="searchString" placeholder="Search for an icon..."/>
+      </div>
+      <div v-if="icons && icons.length > 0" class="file-container">
+        <div v-for="(file, index) in icons" class="list-item" :key="index">
+          <img class="svg" v-bind:src="getImagePath(file)" v-bind:alt="file.path" @click="copyToClipboard(file)">
+          <div class="full-name">{{file.fullName}}</div>
+        </div>
+      </div>
+      <div class="expand-all" @click="toggleLimit" v-if="icons && icons.length >= 100">
+        <span v-if="limit === 100">Limited to 100, show everything?</span>
+        <span v-if="limit !== 100">Showing everything, limit to 100?</span>
+      </div>
+      <input type="text" v-model="searchString" id="copy-box"/>
+      <div class="footer">
+        <div class="footer-text"><a href="http://github.com/studiefredfredrik/icons9"><b>Icons9</b></a> - v0.4 - Color selector added + mdi icons</div>
+        <div class="footer-text">Icons by <a href="http://www.fontawesome.com">FontAwesome</a> (free set)</div>
+        <div class="footer-text">Icons by <a href="https://codeload.github.com/google/material-design-icons/zip/master">Material design icons</a> (free set)</div>
       </div>
     </div>
-    <div class="expand-all" @click="toggleLimit" v-if="icons && icons.length >= 100">
-      <span v-if="limit === 100">Limited to 100, show everything?</span>
-      <span v-if="limit !== 100">Showing everything, limit to 100?</span>
-    </div>
-    <input type="text" v-model="searchString" id="copy-box"/>
-    <div class="footer">
-      <div class="footer-text"><a href="http://github.com/studiefredfredrik/icons9"><b>Icons9</b></a> - v0.4 - Color selector added + mdi icons</div>
-      <div class="footer-text">Icons by <a href="http://www.fontawesome.com">FontAwesome</a> (free set)</div>
-      <div class="footer-text">Icons by <a href="https://codeload.github.com/google/material-design-icons/zip/master">Material design icons</a> (free set)</div>
+    <div class="toaster fade-in" v-if="toasterShown">
+      <div class="toaster-inner">
+        {{toasterMessage}}
+      </div>
+
     </div>
   </div>
 </template>
@@ -45,7 +53,10 @@ export default {
       color: '#6F6F6F',
       colorDebounceHolder: null,
       iconset: 'mdi',
-      limit: 100
+      limit: 100,
+      toasterMessage: '',
+      toasterShown: false,
+      toasterDebounceHolder: null
     }
   },
   computed:{
@@ -76,6 +87,7 @@ export default {
         .replace('<svg', '<svg width="50px" height="50px"') // Add size to icons
       copyText.select();
       document.execCommand("copy");
+      this.showToaster('Icon SVG copied to clipboard')
     },
     getImagePath(file){
       let image = encodeURIComponent(file.image.replace('<path ', `<path style="fill:${this.color};stroke:${this.color};" `))
@@ -91,6 +103,14 @@ export default {
     toggleLimit(){
       if(this.limit === 100) this.limit = 10000
       else this.limit = 100
+    },
+    showToaster(message){
+      this.toasterMessage = message
+      clearTimeout(this.toasterDebounceHolder)
+      this.toasterShown = true
+      this.toasterDebounceHolder = setTimeout(() => {
+        this.toasterShown = false
+      }, 2000)
     }
   }
 }
@@ -256,6 +276,41 @@ export default {
     text-decoration: none;
     color: #626262;
   }
+
+  .toaster{
+    position: fixed;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    /*opacity: 0.5;*/
+  }
+  .toaster-inner{
+    background-color:#6F6F6F;
+    color: #FFFFFF;
+    padding: 20px 80px 20px 80px;
+    border-radius: 10px;
+    margin: auto;
+    width: 200px;
+    height: 40px;
+    opacity: 0.7;
+  }
+
+  .fade-in {
+    animation: fadeInOpacity 0.15s linear;
+  }
+
+  @keyframes fadeInOpacity {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.7;
+    }
+  }
+
 
   @media only screen and (max-width: 750px) {
     .container{
