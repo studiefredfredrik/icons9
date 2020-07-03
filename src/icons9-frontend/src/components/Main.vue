@@ -90,7 +90,7 @@ export default {
       this.showToaster('Icon SVG copied to clipboard')
     },
     getImagePath(file){
-      let image = encodeURIComponent(file.image.replace('<path ', `<path style="fill:${this.color};stroke:${this.color};" `))
+      let image = encodeURIComponent(file.image.replace('<path ', `<path style="fill:${this.color};" `))
       return `data:image/svg+xml;utf8,${image}`
     },
     updateColor(e){
