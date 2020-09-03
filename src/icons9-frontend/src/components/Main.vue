@@ -82,7 +82,7 @@ export default {
     copyToClipboard(file){
       let copyText = document.getElementById("copy-box");
       copyText.value = file.image
-        .replace('<path ', `<path style="fill:${this.color};stroke:${this.color};" `) // Add color
+        .replace('<path ', `<path style="fill:${this.color};" `) // Add color
         .replace('width="48" height="48" ','') // Remove sixe from mdi icons
         .replace('<svg', '<svg width="50px" height="50px"') // Add size to icons
       copyText.select();
