@@ -112,4 +112,4 @@ app.get('/api/library-mdi', function (req, res) {
 })
 
 console.log(`Servering on: http://localhost:${port}`)
-app.listen(port)
+app.listen(port, '0.0.0.0')
