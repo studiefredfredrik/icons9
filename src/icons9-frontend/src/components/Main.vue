@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
   .toolbox-left{
     position: absolute;
     top: 0;

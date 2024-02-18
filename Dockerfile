@@ -1,10 +1,15 @@
-FROM node:8
+FROM node:20
 
-COPY . /app/
-
-WORKDIR /app
-
-RUN cd /app/src && npm install && cd /app/src/icons9-frontend && npm install && npm run build
+COPY ./src /app/src
 
 WORKDIR /app/src
+RUN npm ci
+
+WORKDIR /app/src/icons9-frontend
+RUN npm ci
+ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm run build
+
+WORKDIR /app/src
+USER node
 CMD [ "node", "server.js" ]
