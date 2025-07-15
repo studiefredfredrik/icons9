@@ -20,17 +20,17 @@ svgToDataURL = svgStr => {
 		const files = await glob(`./icons9-frontend/dist/svgs/fas/**/*.svg`)
 	let based = []
 	files.forEach(file => {
-		let data = fs.readFileSync(file)
+	let data = fs.readFileSync(file)
     let path = file.replace('./icons9-frontend/dist/','')
     let prefix = file.startsWith('brands') ? 'fab' : 'fas'
-    let name = path.substring(path.lastIndexOf('/')+1).replace('.svg','')
-		based.push({
-			encoded: svgToDataURL(data.toString()),
-			image: data.toString(),
-			path: path,
-      prefix: prefix,
-      name: name,
-      fullName: `${prefix} fa-${name}`
+    let name = path.substring(path.replaceAll('\\', '/').lastIndexOf('/')+1).replace('.svg','')
+    based.push({
+        encoded: svgToDataURL(data.toString()),
+        image: data.toString(),
+        path: path,
+		prefix: prefix,
+		name: name,
+		fullName: `${prefix} fa-${name}`
 		})
 	})
 

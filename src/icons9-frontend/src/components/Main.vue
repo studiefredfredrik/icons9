@@ -63,7 +63,7 @@ export default {
     icons(){
       if(!this.allicons) return null
       let icons =  this.allicons.filter(icon => {
-        if(icon.path.includes(this.searchString)) return true
+        if(icon.path.toLowerCase().includes(this.searchString.toLowerCase())) return true
         return false
       })
       return icons.slice(0, this.limit)
@@ -249,7 +249,7 @@ export default {
   }
   .file-container{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto;
     justify-items: center;
   }
   .full-name{
@@ -258,7 +258,6 @@ export default {
   .list-item{
     width: 150px;
     margin: 10px 1px;
-    justify-items: center;
   }
   #copy-box{
     height: 1px;
@@ -312,7 +311,8 @@ export default {
   }
 
 
-  @media only screen and (max-width: 750px) {
+
+  @media only screen and (min-width: 550px) {
     .container{
       width: 100%;
       margin: auto;
@@ -322,7 +322,11 @@ export default {
       grid-template-columns: auto auto auto;
     }
   }
-  @media only screen and (min-width: 1930px) {
+  @media only screen and (min-width: 1000px) {
+    .container{
+      width: 1000px;
+      margin: auto;
+    }
     .file-container{
       display: grid;
       grid-template-columns: auto auto auto auto auto auto;
