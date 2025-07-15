@@ -1,4 +1,4 @@
-let glob = require('glob')
+const { glob } = require('glob')
 let express = require('express');
 let app = express();
 let fs = require('fs')
@@ -15,7 +15,9 @@ svgToDataURL = svgStr => {
 	return dataUrl
 }
 
-glob(`./icons9-frontend/dist/svgs/fas/**/*.svg`, null, async function (er, files) {
+(async () => {
+	try {
+		const files = await glob(`./icons9-frontend/dist/svgs/fas/**/*.svg`)
 	let based = []
 	files.forEach(file => {
 		let data = fs.readFileSync(file)
@@ -38,32 +40,11 @@ glob(`./icons9-frontend/dist/svgs/fas/**/*.svg`, null, async function (er, files
 		}
 		console.log('\x1b[36m%s\x1b[0m',`Library-fas is now ready to be served`)
 	});
-})
+	} catch (error) {
+		console.error('Error processing FAS icons:', error);
+	}
+})()
 
-// glob(`./icons9-frontend/dist/svgs/mdi/**/*48px.svg`, null, async function (er, files) {
-// 	let based = []
-// 	files.forEach(file => {
-// 		let data = fs.readFileSync(file)
-// 		let path = file.replace('./icons9-frontend/dist/','')
-// 		let prefix = file.startsWith('brands') ? 'fab' : 'fas'
-// 		let name = 'mdi-' + path.substring(path.lastIndexOf('/')+1).replace('.svg','').replace('ic_','').replace('_48px','').replace(/_/g, '-')
-// 		based.push({
-// 			encoded: svgToDataURL(data.toString()),
-// 			image: data.toString(),
-// 			path: path,
-// 			prefix: prefix,
-// 			name: name,
-// 			fullName: `${name}`
-// 		})
-// 	})
-//
-// 	fs.writeFile('./library-mdi.json', JSON.stringify(based), function (err) {
-// 		if (err) {
-// 			console.log('Error writing library to file')
-// 		}
-// 		console.log('\x1b[36m%s\x1b[0m',`Library-mdi is now ready to be served`)
-// 	});
-// })
 
 function mdiWithContribFromScrape(){
 	// It turns out that the icons here: https://materialdesignicons.com/
