@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:22
 
 COPY ./src /app/src
 
@@ -7,7 +7,6 @@ RUN npm ci
 
 WORKDIR /app/src/icons9-frontend
 RUN npm ci
-ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run build
 
 WORKDIR /app/src
